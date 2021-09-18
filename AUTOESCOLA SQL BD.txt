@@ -1,0 +1,44 @@
+create schema autoescola;
+use autoescola;
+
+
+    create table Exame_medico(
+
+    Matricula varchar(8) NOT NULL PRIMARY KEY,
+    Doença_cronica varchar(20),
+    idade integer,
+    Resultado_Medico varchar(9)
+
+    );
+
+    create table Prova(
+
+    senha integer(3) NOT NULL PRIMARY KEY,
+    Nota_Prova_escrita varchar(3),
+    Nota_Prova_pratica varchar(3),
+    cod_prova varchar(7),
+    Resultado_Final varchar(9)
+
+    );
+
+    create table Dados_adicionais(
+
+    Sigla_estado varchar(2), 
+    Cidade varchar(30),
+    Bairro varchar(30),
+    Rua varchar(30),
+    Numero integer,
+    Cpf varchar(11) NOT NULL PRIMARY KEY
+    );
+
+    CREATE TABLE Aluno (
+    Telefone VARCHAR(11) NOT NULL PRIMARY KEY,
+    Nome VARCHAR(60),
+    Ano_nascimento INTEGER,
+    FK_codprova varchar(7),
+    FK_cpf VARCHAR(11),
+    FK_matricula VARCHAR(8),
+    FOREIGN KEY (FK_cpf) REFERENCES Dados_adicionais (Cpf),
+    FOREIGN KEY (FK_matricula) REFERENCES Exame_medico (Matricula),
+    FOREIGN KEY (FK_codprova) REFERENCES Prova (Cod_prova)
+);
